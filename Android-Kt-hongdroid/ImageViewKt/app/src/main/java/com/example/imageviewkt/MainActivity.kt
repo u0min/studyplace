@@ -30,6 +30,12 @@ class MainActivity : AppCompatActivity() {
         // ex> binding.tvMessage.setText("안녕하세요 홍드로이드 입니다.")
         /* 여기서 부터 추가 */
 
+        binding.btnToast.setOnClickListener{
+            Toast.makeText(this@MainActivity, "버튼이 클릭 되었습니다.", Toast.LENGTH_SHORT).show()
+        }
+
+        //import Toast
+
         /* 여기서 부터 추가 */
     }
     // 액티비티가 파괴될 때..
