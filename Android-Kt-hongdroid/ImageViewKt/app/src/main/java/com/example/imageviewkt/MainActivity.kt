@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         /* 여기서 부터 추가 */
 
         binding.btnToast.setOnClickListener{
+
+            binding.ivProfile.setImageResource(R.drawable.loveandroid)
             Toast.makeText(this@MainActivity, "버튼이 클릭 되었습니다.", Toast.LENGTH_SHORT).show()
         }
 
