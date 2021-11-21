@@ -3,6 +3,7 @@ package com.example.listviewkt
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import com.example.listviewkt.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -29,6 +30,11 @@ class MainActivity : AppCompatActivity() {
         // 뷰 id도 파스칼케이스 + 카멜케이스의 네이밍규칙 적용으로 인해서 tv_message -> tvMessage 로 자동 변환 되었습니다.
         // ex> binding.tvMessage.setText("안녕하세요 홍드로이드 입니다.")
         /* 여기서 부터 추가 */
+
+        val item = arrayOf("사과", "배", "딸기", "키위", "코틀린")
+        // context란 한 액티비티의 모든 정보
+        binding.listView.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, item)
+        // listView - adapter 연결 되어 있어야함
 
         /* 여기서 부터 추가 */
     }
