@@ -2,7 +2,6 @@ package com.example.sharedkt
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.view.GravityCompat
 import com.example.sharedkt.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -12,7 +11,20 @@ class MainActivity : AppCompatActivity() {
     // 매번 null 체크를 할 필요 없이 편의성을 위해 바인딩 변수 재 선언
     private val binding get() = mBinding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    // 함수 추가
+    private fun saveData() {
+        val pref = getSharedPreferences("pref", 0) // mode 옵션 default 0
+        val edit = pref.edit() // 수정 모드
+        edit.putString("name", binding.etHello.text.toString()) // 1번 인자 : 키 값, 2번 인자 실제 담아둘 값
+        edit.apply() // 값을 저장 완료
+    }
+
+    private fun loadData() {
+        val pref = getSharedPreferences("pref", 0) // mode 옵션 default 0
+        binding.etHello.setText(pref.getString("name", "")) // 1번 인자 : 키 값, 2번 키값의 데이터가 없을 경우 대체 값
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) { // 앱이 처음 실행될 때 한번만 수행되는 곳 (초기화)
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_main)
         // 자동 생성된 뷰 바인딩 클래스에서의 inflate 라는 메서드를 활용해서
@@ -28,15 +40,19 @@ class MainActivity : AppCompatActivity() {
         // ex> binding.tvMessage.setText("안녕하세요 홍드로이드 입니다.")
         /* 여기서 부터 추가 */
 
+        loadData() // 저장된 edit text 값을 setText
+
         /* 여기서 부터 추가 */
     }
+
     // 액티비티가 파괴될 때..
-    override fun onDestroy() {
+    override fun onDestroy() { // 해당 액티비티가 종료되는 시점이 다가올 때 호출
+
+        saveData() // edit text 값 저장 ! binding null 전에 저장해야 되었음
+
         // onDestroy 에서 binding class 인스턴스 참조를 정리해주어야 한다.
         mBinding = null
         super.onDestroy()
-
-
 
     }
 }
