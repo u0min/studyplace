@@ -2,6 +2,10 @@ package com.example.webviewkt
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
+import android.webkit.WebChromeClient
+import android.webkit.WebViewClient
 import com.example.webviewkt.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +32,14 @@ class MainActivity : AppCompatActivity() {
         // ex> binding.tvMessage.setText("안녕하세요 홍드로이드 입니다.")
         /* 여기서 부터 추가 */
 
+        binding.webView.settings.javaScriptEnabled = true // 자바 스크립트 허용
+
+        /* 웹뷰에서 새 창이 뜨지 않도록 방지 */
+        binding.webView.webViewClient = WebViewClient()
+        binding.webView.webChromeClient = WebChromeClient()
+        /* 웹뷰에서 새 창이 뜨지 않도록 방지 */
+
+        binding.webView.loadUrl("https://www.naver.com") // 링크 주소를 Load 함
 
         /* 여기서 부터 추가 */
 
