@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class ProfileAdapter (val profileList: ArrayList<Profiles>) : RecyclerView.Adapter<ProfileAdapter.CustomViewHolder>()
@@ -13,7 +14,13 @@ class ProfileAdapter (val profileList: ArrayList<Profiles>) : RecyclerView.Adapt
     override fun onCreateViewHolder(parent: ViewGroup,viewType: Int): ProfileAdapter.CustomViewHolder {
         //viewHolder 생성시
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
-        return CustomViewHolder(view)
+        return CustomViewHolder(view).apply {
+            itemView.setOnClickListener {
+                val curPos : Int = adapterPosition
+                val profile : Profiles = profileList.get(curPos)
+                Toast.makeText(parent.context, "이름 : ${profile.name}\n나이 : ${profile.age}\n직업 : ${profile.job}", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun getItemCount(): Int {
